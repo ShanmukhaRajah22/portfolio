@@ -45,7 +45,7 @@ export const site = {
   tagline: "I build clean, modern websites and web apps where design, functionality, and even the smallest details matter.",
   about: [
     "Hey, I'm Shanmukha, a full stack developer who loves building clean, modern websites and apps where design, functionality, and even the smallest details matter, with a focus on making products that are both practical and visually satisfying.",
-    "I spend most of my time in the terminal, the browser, or scribbling on a whiteboard. I lean backend,not because I don't like frontend, but because I enjoy making polished things actually hold up.",
+    "I spend most of my time in the terminal, the browser, or scribbling on a whiteboard. I learn backend,not because I don't like frontend, but because I enjoy making polished things actually hold up.",
     "I don't ship junk. Maintainability isn't optional. And I build best when I'm curious.",
   ],
   tldr: [

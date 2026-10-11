@@ -13,7 +13,7 @@ export function AboutPage() {
     },
     {
       title: "Backend Precision",
-      description: "I lean backend because I enjoy making polished frontend interfaces actually hold up under load with robust architecture.",
+      description: "I learn backend because I enjoy making polished frontend interfaces actually hold up under load with robust architecture.",
       icon: <Terminal className="text-indigo-400" size={24} />
     },
     {

@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { Shell, GapBand, SectionHeader } from "@/components/Layout";
 import { site } from "@/config/site";
-import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+type CalNamespace = (...args: unknown[]) => void;
+type CalApi = ((...args: unknown[]) => void) & {
+  ns?: Record<string, CalNamespace>;
+  config?: {
+    forwardQueryParams?: boolean;
+  };
+};
 
 const QUOTES = [
   {
@@ -32,6 +39,35 @@ export function Footer() {
   const [quoteIndex, setQuoteIndex] = useState(0);
 
   useEffect(() => {
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src="https://app.cal.com/embed/embed.js"]',
+    );
+    const initializeCal = () => {
+      const cal = (window as Window & { Cal?: CalApi }).Cal;
+      if (!cal) return;
+
+      cal("init", "15min", { origin: "https://app.cal.com" });
+      cal.config = cal.config || {};
+      cal.config.forwardQueryParams = true;
+      cal.ns?.["15min"]?.("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view",
+      });
+    };
+
+    if (existingScript) {
+      initializeCal();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://app.cal.com/embed/embed.js";
+    script.async = true;
+    script.onload = initializeCal;
+    document.head.appendChild(script);
+  }, []);
+
+  useEffect(() => {
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
@@ -59,18 +95,20 @@ export function Footer() {
   return (
     <footer className="w-full">
       <GapBand h="h-12" />
-      {/* Scrolled Too Far Section */}
-      <SectionHeader title="Scrolled Too Far" />
+      {/* Booking Section */}
+      <SectionHeader title="Book a Call" />
       <Shell className="px-6 py-10 text-center sm:px-8">
         <p className="text-[14px] text-[var(--muted)]">
-          If you&apos;ve read this far, you might be interested in collaborating or building something great.
+          Have an idea, opportunity, or project in mind? Let&apos;s talk.
         </p>
         <a
-          href={`mailto:${site.email}`}
+          href="#book-15min"
+          data-cal-link="shanmukha-nzn84x/15min"
+          data-cal-namespace="15min"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
           className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-[var(--fg)] px-5 py-2.5 text-[13px] font-semibold text-[var(--bg)] transition-transform duration-200 hover:-translate-y-0.5"
         >
-          Let&apos;s Talk
-          <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+          Book a 15-minute call
         </a>
       </Shell>
 
