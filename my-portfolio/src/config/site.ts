@@ -62,7 +62,7 @@ export const site = {
   bannerImage: "/images/cover.jpg",
   socialBannerImage: "/social-banner.png",
   initials: "SR",
-  role: "Full Stack Developer",
+  role: "AI Full Stack Developer",
   location: "India",
   timezone: "Asia/Kolkata",
   email: "shanmukharajah22@gmail.com",

@@ -6,24 +6,24 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const QUOTES = [
   {
-    text: "When something is important enough, you do it even if the odds are not in your favor.",
-    author: "Elon Musk",
+    text: "With great power comes great responsibility.",
+    author: "Uncle Ben",
   },
   {
-    text: "The biggest risk is not taking any risk.",
-    author: "Mark Zuckerberg",
+    text: "If you're nothing without this suit, then you shouldn't have it.",
+    author: "Tony Stark",
   },
   {
-    text: "The people who are crazy enough to think they can change the world are the ones who do.",
-    author: "Steve Jobs",
+    text: "Why do we fall, Bruce? So that we can learn to pick ourselves up.",
+    author: "Thomas Wayne",
   },
   {
-    text: "I’ve decided to become the Pirate King. If I die trying, then at least I die fighting for my dream.",
-    author: "Monkey D. Luffy",
+    text: "It's not who I am underneath, but what I do that defines me.",
+    author: "Batman",
   },
   {
-    text: "If you don't like your destiny, don't accept it.",
-    author: "Naruto Uzumaki",
+    text: "The door is more than it appears. It separates who you are from who you can be. You do not have to walk through it alone.",
+    author: "Doctor Strange",
   },
 ];
 

@@ -16,10 +16,8 @@ export function Hero() {
   };
 
   const roles = [
-    "Full Stack Developer.",
-    "Backend Engineer.",
-    "Open Source Contributor.",
-    "Problem Solver."
+    "AI Full Stack Developer.",
+    "Backend Engineer."
   ];
   const [roleIndex, setRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");

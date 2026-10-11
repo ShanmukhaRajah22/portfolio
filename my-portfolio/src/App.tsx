@@ -14,7 +14,6 @@ import { GithubActivity } from "@/sections/GithubActivity";
 import { CommandPalette } from "@/components/command-palette";
 import { Konami } from "@/components/konami";
 import { Analytics } from "@vercel/analytics/react";
-import { IronManDecoration } from "@/components/IronManDecoration";
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -86,7 +85,6 @@ export function App() {
           <ScrollToTop />
           <Konami />
           <div className="min-h-screen bg-[var(--bg)] font-sans text-[var(--fg)] antialiased transition-colors duration-300 relative">
-            <IronManDecoration />
             <Nav onOpenPalette={() => setPaletteOpen(true)} />
             <SideIndex />
 
