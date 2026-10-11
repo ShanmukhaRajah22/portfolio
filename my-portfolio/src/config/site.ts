@@ -67,9 +67,9 @@ export const site = {
   tagline:
     "I build clean, modern websites and web apps where design, functionality, and even the smallest details matter.",
   about: [
-    "Hey, I'm Shanmukha, a full stack developer who loves building clean, modern websites and apps where design, functionality, and even the smallest details matter, with a focus on making products that are both practical and visually satisfying.",
-    "I spend most of my time in the terminal, the browser, or scribbling on a whiteboard. I learn backend, not because I don't like frontend, but because I enjoy making polished things actually hold up.",
-    "I don't ship junk. Maintainability isn't optional. And I build best when I'm curious.",
+    "Hey, I'm Shanmukha. I got my start when I was 15, messing around with C, Python, SQL, and computer networks. By the time I hit college, that curiosity turned into a full-blown obsession with building real-world products.",
+    "I'm a full-stack developer, but I spend most of my time deep in the backend, building intelligent AI agents and setting up strict evaluation frameworks to make sure they actually work. I focus heavily on infrastructure because a beautiful frontend only matters if the system behind it can hold up.",
+    "I live in the terminal, think on whiteboards, and believe maintainability isn't optional. I don't ship junk.",
   ],
   tldr: [
     "Building products.",
@@ -104,7 +104,51 @@ export const site = {
     },
   ] as Job[],
   freelanceProjects: [] as FreelanceProject[],
-  projects: [] as Project[],
+  projects: [
+    {
+      title: "Omega-CLI",
+      blurb:
+        "An AI coding-agent workspace that combines iterative tool execution, multi-provider streaming, persistent memory, voice transcription, and a Bun-powered React starter environment.",
+      story:
+        "• Engineered an iterative AI coding-agent loop coordinating LLM responses, function calls, tool execution, and conversation updates, with configurable providers and a 10-step execution guard.\n\n• Integrated OpenRouter and Google Gemini streaming interfaces behind a shared provider abstraction for normalized text, function-call arguments, and token-usage metadata.\n\n• Implemented project-scoped persistent memory and resumable JSON-backed conversation sessions, including CRUD operations and schema-structured summarization after 30 messages.\n\n• Developed voice-input transcription with SoX microphone capture, buffered audio chunks, asynchronous requests, and a local faster-whisper and NumPy service.\n\n• Built a Bun-powered React and TypeScript starter workspace with a configurable build script, Tailwind CSS, hot reloading, and lightweight API endpoints.",
+      stack: ["NumPy", "TypeScript", "OpenRouter API", "faster-whisper", "React", "Python", "Zod"],
+      year: "Aug 2026 – Sept 2026",
+      links: {
+        source: "https://github.com/ShanmukhaRajah22/Omega-CLI",
+      },
+      featured: true,
+      image: "/omegacli.png",
+      categories: ["Fullstack", "Backend"],
+    },
+    {
+      title: "CloudCart",
+      blurb:
+        "A product backend with RESTful APIs, direct S3 image uploads, CloudFront delivery, validation, centralized errors, and searchable product retrieval.",
+      story:
+        "• Developed RESTful APIs with Node.js, Express.js, and MongoDB for product CRUD operations using Mongoose.\n\n• Integrated AWS S3 presigned URLs for direct image uploads, separating file storage from backend processing.\n\n• Configured Amazon CloudFront with Origin Access Control to deliver private S3 images with edge caching.\n\n• Implemented Zod validation, centralized error handling, and MongoDB search, sorting, and pagination.",
+      stack: ["JavaScript", "Node.js", "Express.js", "MongoDB", "AWS S3", "Amazon CloudFront"],
+      year: "Aug 2026 – Sept 2026",
+      links: {
+        source: "https://github.com/ShanmukhaRajah22/CloudCart",
+      },
+      image: "/project-images/cloudcart.png",
+      categories: ["Backend"],
+    },
+    {
+      title: "UltronX",
+      blurb:
+        "A tool-using AI agent with validated function calling, persistent conversational memory, web tools, authentication, streaming, and documented REST APIs.",
+      story:
+        "• Built a tool-using AI agent with OpenRouter function calling, Zod-validated tools, and a bounded execution loop for web search, webpage reading, and memory operations.\n\n• Implemented persistent conversational memory with MongoDB, ranking stored context by importance, confidence, and recency.\n\n• Developed modular REST APIs with JWT authentication, bcrypt password hashing, SSE streaming, rate limiting, centralized error handling, and Swagger documentation.",
+      stack: ["TypeScript", "Bun", "Express.js", "MongoDB", "Mongoose", "OpenRouter", "Zod"],
+      year: "July 2026 – Aug 2026",
+      links: {
+        source: "https://github.com/ShanmukhaRajah22/UltronX",
+      },
+      image: "/ultronx.png",
+      categories: ["Backend", "Fullstack"],
+    },
+  ] as Project[],
   skills: [
     "TypeScript",
     "JavaScript",
