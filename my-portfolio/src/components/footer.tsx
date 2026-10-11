@@ -5,7 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type CalNamespace = (...args: unknown[]) => void;
 type CalApi = ((...args: unknown[]) => void) & {
+  loaded?: boolean;
   ns?: Record<string, CalNamespace>;
+  q?: unknown[][];
   config?: {
     forwardQueryParams?: boolean;
   };
@@ -39,32 +41,55 @@ export function Footer() {
   const [quoteIndex, setQuoteIndex] = useState(0);
 
   useEffect(() => {
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      'script[src="https://app.cal.com/embed/embed.js"]',
-    );
-    const initializeCal = () => {
-      const cal = (window as Window & { Cal?: CalApi }).Cal;
-      if (!cal) return;
-
-      cal("init", "15min", { origin: "https://app.cal.com" });
-      cal.config = cal.config || {};
-      cal.config.forwardQueryParams = true;
-      cal.ns?.["15min"]?.("ui", {
-        hideEventTypeDetails: false,
-        layout: "month_view",
-      });
+    const calWindow = window as Window & { Cal?: CalApi };
+    const push = (target: { q?: unknown[][] }, args: unknown[]) => {
+      target.q = target.q || [];
+      target.q.push(args);
     };
+    let cal = calWindow.Cal;
 
-    if (existingScript) {
-      initializeCal();
-      return;
+    if (!cal) {
+      cal = ((...args: unknown[]) => {
+        if (!cal) return;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          const script = document.createElement("script");
+          script.src = "https://app.cal.com/embed/embed.js";
+          script.async = true;
+          document.head.appendChild(script);
+          cal.loaded = true;
+        }
+
+        if (args[0] === "init") {
+          const namespace = args[1];
+          if (typeof namespace === "string") {
+            const api = ((...apiArgs: unknown[]) => {
+              push(api, apiArgs);
+            }) as CalNamespace & { q?: unknown[][] };
+            cal.ns = cal.ns || {};
+            cal.ns[namespace] = api;
+            push(api, args);
+            push(cal, ["initNamespace", namespace]);
+          } else {
+            push(cal, args);
+          }
+          return;
+        }
+
+        push(cal, args);
+      }) as CalApi;
+      calWindow.Cal = cal;
     }
 
-    const script = document.createElement("script");
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    script.onload = initializeCal;
-    document.head.appendChild(script);
+    cal("init", "15min", { origin: "https://app.cal.com" });
+    cal.config = cal.config || {};
+    cal.config.forwardQueryParams = true;
+    cal.ns?.["15min"]?.("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view",
+    });
+
   }, []);
 
   useEffect(() => {
@@ -101,15 +126,15 @@ export function Footer() {
         <p className="text-[14px] text-[var(--muted)]">
           Have an idea, opportunity, or project in mind? Let&apos;s talk.
         </p>
-        <a
-          href="#book-15min"
+        <button
+          type="button"
           data-cal-link="shanmukha-nzn84x/15min"
           data-cal-namespace="15min"
           data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
           className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-[var(--fg)] px-5 py-2.5 text-[13px] font-semibold text-[var(--bg)] transition-transform duration-200 hover:-translate-y-0.5"
         >
           Book a 15-minute call
-        </a>
+        </button>
       </Shell>
 
       {/* Quote Band */}
